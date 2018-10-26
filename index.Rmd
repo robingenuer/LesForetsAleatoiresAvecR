@@ -1,7 +1,6 @@
 ---
-title: |
-       | Les Forêts aléatoires avec R
-       | *Site compagnon du livre*
+title: "Les Forêts aléatoires avec R"
+subtitle: "*Le site du livre*"
 author: "Robin Genuer et Jean-Michel Poggi"
 date: '`r Sys.Date()`'
 output:
