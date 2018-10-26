@@ -22,7 +22,7 @@ if (!knitr:::is_html_output()) {
 }
 ```
 
-# Préambule {-}
+# Preambule {-}
 
 Cette page contient l'ensemble des codes R inclus dans le livre "Les Forêts
 aléatoires avec R" de Robin Genuer et Jean-Michel Poggi, à paraître dans la
