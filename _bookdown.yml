@@ -1,0 +1,5 @@
+book_filename: "pur_rf.Rmd"
+new_session: no
+output_dir: "docs"
+ui:
+  chapter_name: "Chapitre "

@@ -1,0 +1,72 @@
+
+#' # 4 Importance des variables
+#' 
+#' ## 4.1 Notions d’importance
+
+## ----impRFDef, fig.height=8, fig.cap="Importances des variables classées par ordre décroissant pour le jeu de données `spam`"----
+RFDefImp <- randomForest(type ~ ., data = spamApp, importance=TRUE)
+varImpPlot(RFDefImp, type = 1, scale = FALSE, n.var = ncol(spamApp) - 1,
+           cex = 0.8, main = "Importance des variables")
+
+#' ## 4.3 Diversité des arbres et importance des variables
+
+## ----impBagStump, fig.cap="Importance des variables pour un Bagging d'arbres à deux feuilles, données `spam`."----
+bagStumpImp <- randomForest(type~., spamApp, mtry = ncol(spamApp) - 1,
+                            maxnodes=2, importance=TRUE)
+varImpPlot(bagStumpImp, type = 1, scale = FALSE, n.var = 20, cex = 0.8,
+           main = "Importance des variables")
+
+## ----impRFStump, fig.cap="Importance des variables pour une RF d'arbres à deux feuilles avec la valeur de `mtry` par défaut, données `spam`."----
+RFStumpImp <- randomForest(type~., spamApp, maxnodes=2, importance=TRUE)
+varImpPlot(RFStumpImp, type = 1, scale = FALSE, n.var = 20, cex = 0.8,
+           main = "Importance des variables")
+
+#' ## 4.5 Exemples
+#' 
+#' ### 4.5.1 Une illustration par simulation en régression
+
+## ----impFried, fig.cap="Importance des variables, données simulées en régression."----
+library(mlbench)
+fried1Simu <- mlbench.friedman1(n = 500)
+fried1Data <- data.frame(fried1Simu$x, y = fried1Simu$y)
+fried1RFimp <- randomForest(y ~., fried1Data, importance = TRUE)
+varImpPlot(fried1RFimp, type = 1, scale = FALSE,
+           main = "Importance des variables")
+
+## ----impFriedPartialPlot, fig.cap="Effets marginaux, données simulées en régression."----
+partialPlot(fried1RFimp, fried1Data, x.var = "X1", main = "X1")
+
+#' ### 4.5.2 Prédire la concentration d’ozone
+
+## ----impOzoneLoad--------------------------------------------------------
+library("randomForest")
+data("Ozone", package = "mlbench")
+OzRFDefImp <- randomForest(V4 ~ ., Ozone, na.action = na.omit,
+                           importance = TRUE)
+
+## ----impOzoneRFDefImpPlot, fig.cap="Importance des variables, données `Ozone`."----
+varImpPlot(OzRFDefImp, type = 1, scale = FALSE,
+           main = "Importance des variables")
+
+#' ### 4.5.3 Analyser des données génomiques
+
+## ----impVac18load--------------------------------------------------------
+library(randomForest)
+data("vac18", package = "mixOmics")
+
+## ----impVac18DataManage--------------------------------------------------
+geneExpr <- vac18$genes
+stimu <- vac18$stimulation
+
+## ----impVac18RFDefImp----------------------------------------------------
+vacRFDefImp <- randomForest(x = geneExpr, y = stimu, mtry = ncol(geneExpr)/3,
+                            importance = TRUE)
+
+## ----impVac18RFDefImpPlot, fig.height=6, fig.cap="Importance des 30 variables les plus importantes classées par ordre décroissant, données `Vac18`."----
+varImpPlot(vacRFDefImp, type = 1, scale = FALSE, cex = 0.8)
+
+## ----impVac18RFDefAllImpPlot, fig.cap="Importance de toutes les variables classées par ordre décroissant d'importance, données `Vac18`."----
+vacImp <- vacRFDefImp$importance[, nlevels(stimu) + 1]
+plot(sort(vacImp, decreasing = TRUE), type = "l", xlab = "Variables",
+     ylab = "Importance des variables")
+

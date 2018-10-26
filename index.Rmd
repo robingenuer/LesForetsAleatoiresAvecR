@@ -1,0 +1,44 @@
+---
+title: |
+       | Les Forêts aléatoires avec R
+       | *Site compagnon du livre*
+author: "Robin Genuer et Jean-Michel Poggi"
+date: '`r Sys.Date()`'
+output:
+  bookdown::gitbook:
+    number_sections: FALSE
+site: bookdown::bookdown_site
+description: "Site compagnon du livre"
+---
+
+```{r indexKnitrOpts, include=FALSE}
+knitr::opts_chunk$set(tidy = TRUE,
+                      tidy.opts=list(arrow=TRUE),
+                      message = FALSE,
+                      warning = FALSE,
+                      eval = FALSE)
+if (!knitr:::is_html_output()) {
+  knitr::opts_chunk$set(prompt = TRUE, comment = "",
+                        tidy.opts=list(width.cutoff=50))
+}
+```
+
+# Préambule {-}
+
+Cette page contient l'ensemble des codes R inclus dans le livre "Les Forêts
+aléatoires avec R" de Robin Genuer et Jean-Michel Poggi, à paraître dans la
+collection Pratique de la statistique des Presses Universitaires de Rennes.
+ 
+La navigation est possible directement sur cette page à l'aide
+du menu à gauche, et les scripts R (un par chapitre) sont également
+téléchargeables grâce aux liens ci-dessous :
+
+[Chapitre 1 Introduction](01_intro.R)
+
+[Chapitre 2 Arbres CART](02_cart.R)
+
+[Chapitre 3 Forêts aléatoires](03_rf.R)
+
+[Chapitre 4 Importance des variables](04_imp.R)
+
+[Chapitre 5 Sélection de variables](05_vsurf.R)
