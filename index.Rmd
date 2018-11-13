@@ -7,7 +7,7 @@ output:
   bookdown::gitbook:
     number_sections: FALSE
 site: bookdown::bookdown_site
-description: "Site compagnon du livre"
+description: "Site du livre"
 ---
 
 ```{r indexKnitrOpts, include=FALSE}
