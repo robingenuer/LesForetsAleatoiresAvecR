@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Les Forêts aléatoires avec R</title>
+  <title>2 Arbres CART | Les Forêts aléatoires avec R</title>
   <meta name="description" content="Site du livre">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Les Forêts aléatoires avec R" />
+  <meta property="og:title" content="2 Arbres CART | Les Forêts aléatoires avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Les Forêts aléatoires avec R" />
+  <meta name="twitter:title" content="2 Arbres CART | Les Forêts aléatoires avec R" />
   
   <meta name="twitter:description" content="Site du livre" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Robin Genuer et Jean-Michel Poggi">
 
 
-<meta name="date" content="2018-11-13">
+<meta name="date" content="2019-03-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -215,17 +215,19 @@ treeMax &lt;-<span class="st"> </span><span class="kw">rpart</span>(type <span c
 <span class="kw">plot</span>(treeMax)
 treeMax<span class="op">$</span>cptable</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotcp</span>(treeMax)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">cpOpt &lt;-<span class="st"> </span>treeMax<span class="op">$</span>cptable[<span class="kw">which.min</span>(treeMax<span class="op">$</span>cptable[, <span class="dv">4</span>]), <span class="dv">1</span>]
+<pre class="sourceCode r"><code class="sourceCode r">cpOpt &lt;-<span class="st"> </span>treeMax<span class="op">$</span>cptable[ <span class="kw">which.min</span>(treeMax<span class="op">$</span>cptable[, <span class="dv">4</span>]), <span class="dv">1</span> ]
 treeOpt &lt;-<span class="st"> </span><span class="kw">prune</span>(treeMax, <span class="dt">cp =</span> cpOpt)
 <span class="kw">plot</span>(treeOpt)
 <span class="kw">text</span>(treeOpt, <span class="dt">xpd =</span> <span class="ot">TRUE</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">thres1SE &lt;-<span class="st"> </span><span class="kw">sum</span>(treeMax<span class="op">$</span>cptable[<span class="kw">which.min</span>(treeMax<span class="op">$</span>cptable[, <span class="dv">4</span>]), <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>])
-cp1SE &lt;-<span class="st"> </span>treeMax<span class="op">$</span>cptable[<span class="kw">min</span>(<span class="kw">which</span>(treeMax<span class="op">$</span>cptable[, <span class="dv">4</span>] <span class="op">&lt;=</span><span class="st"> </span>thres1SE)), <span class="dv">1</span>]
+<pre class="sourceCode r"><code class="sourceCode r">thres1SE &lt;-<span class="st"> </span><span class="kw">sum</span>(treeMax<span class="op">$</span>cptable[ <span class="kw">which.min</span>(treeMax<span class="op">$</span>cptable[, <span class="dv">4</span>]), <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>])
+cp1SE &lt;-<span class="st"> </span>treeMax<span class="op">$</span>cptable[ <span class="kw">min</span>(<span class="kw">which</span>(treeMax<span class="op">$</span>cptable[, <span class="dv">4</span>] <span class="op">&lt;=</span><span class="st"> </span>thres1SE)), <span class="dv">1</span>]
 tree1SE &lt;-<span class="st"> </span><span class="kw">prune</span>(treeMax, <span class="dt">cp =</span> cp1SE)
 <span class="kw">plot</span>(tree1SE)
 <span class="kw">text</span>(tree1SE, <span class="dt">xpd =</span> <span class="ot">TRUE</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">errTestTreeMax &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(treeMax, spamTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) <span class="op">!=</span><span class="st"> </span>spamTest<span class="op">$</span>type)
-errEmpTreeMax &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(treeMax, spamApp, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) <span class="op">!=</span><span class="st"> </span>spamApp<span class="op">$</span>type)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">errTestTreeMax &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(treeMax, spamTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) <span class="op">!=</span>
+<span class="st">                         </span>spamTest<span class="op">$</span>type)
+errEmpTreeMax &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(treeMax, spamApp, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) <span class="op">!=</span>
+<span class="st">                        </span>spamApp<span class="op">$</span>type)</code></pre>
 </div>
 <div id="decoupes-concurrentes-et-de-substitution" class="section level2">
 <h2>2.5 Découpes concurrentes et de substitution</h2>
@@ -236,7 +238,7 @@ errEmpTreeMax &lt;-<span class="st"> </span><span class="kw">mean</span>(<span c
 </div>
 <div id="interpretabilite" class="section level3">
 <h3>2.5.3 Interprétabilité</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span>)
 <span class="kw">barplot</span>(treeMax<span class="op">$</span>variable.importance, <span class="dt">las =</span> <span class="dv">2</span>, <span class="dt">cex.names =</span> <span class="fl">0.8</span>)</code></pre>
 </div>
 </div>
@@ -263,7 +265,7 @@ OzTreeOpt &lt;-<span class="st"> </span><span class="kw">prune</span>(OzTreeMax,
 <h3>2.6.2 Analyser des données génomiques</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
 <span class="kw">data</span>(<span class="st">&quot;vac18&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mixOmics&quot;</span>)
-VAC18 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(vac18<span class="op">$</span>genes, <span class="dt">stimu =</span> vac18<span class="op">$</span>stimulation)</code></pre>
+VAC18 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(vac18<span class="op">$</span>genes, <span class="st">&quot;stimu&quot;</span> =<span class="st"> </span>vac18<span class="op">$</span>stimulation)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">VacTreeDef &lt;-<span class="st"> </span><span class="kw">rpart</span>(stimu <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> VAC18)
 <span class="kw">print</span>(VacTreeDef)
 <span class="kw">plot</span>(VacTreeDef)
@@ -274,7 +276,7 @@ VacTreeMax &lt;-<span class="st"> </span><span class="kw">rpart</span>(stimu <sp
 <span class="kw">text</span>(VacTreeMax, <span class="dt">use.n =</span> <span class="ot">TRUE</span>, <span class="dt">xpd =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">413745</span>)
 VacTreeMaxLoo &lt;-<span class="st"> </span><span class="kw">rpart</span>(stimu <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> VAC18, <span class="dt">minsplit =</span> <span class="dv">2</span>, <span class="dt">cp =</span> <span class="dv">0</span>, <span class="dt">xval =</span> <span class="kw">nrow</span>(VAC18))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
 <span class="kw">plotcp</span>(VacTreeMax)
 <span class="kw">plotcp</span>(VacTreeMaxLoo)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">VacIndcpOpt &lt;-<span class="st"> </span><span class="kw">which.min</span>(VacTreeMaxLoo<span class="op">$</span>cptable[, <span class="dv">4</span>])
@@ -312,7 +314,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -322,6 +324,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },

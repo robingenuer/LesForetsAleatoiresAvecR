@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Les Forêts aléatoires avec R</title>
+  <title>4 Importance des variables | Les Forêts aléatoires avec R</title>
   <meta name="description" content="Site du livre">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Les Forêts aléatoires avec R" />
+  <meta property="og:title" content="4 Importance des variables | Les Forêts aléatoires avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Les Forêts aléatoires avec R" />
+  <meta name="twitter:title" content="4 Importance des variables | Les Forêts aléatoires avec R" />
   
   <meta name="twitter:description" content="Site du livre" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Robin Genuer et Jean-Michel Poggi">
 
 
-<meta name="date" content="2018-11-13">
+<meta name="date" content="2019-03-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -205,17 +205,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>4 Importance des variables</h1>
 <div id="notions-dimportance" class="section level2">
 <h2>4.1 Notions d’importance</h2>
-<pre class="sourceCode r"><code class="sourceCode r">RFDefImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamApp, <span class="dt">importance =</span> <span class="ot">TRUE</span>)
-<span class="kw">varImpPlot</span>(RFDefImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">n.var =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, 
-    <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">RFDefImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamApp, <span class="dt">importance=</span><span class="ot">TRUE</span>)
+<span class="kw">varImpPlot</span>(RFDefImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">n.var =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>,
+           <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
 </div>
 <div id="diversite-des-arbres-et-importance-des-variables" class="section level2">
 <h2>4.3 Diversité des arbres et importance des variables</h2>
-<pre class="sourceCode r"><code class="sourceCode r">bagStumpImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">mtry =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">maxnodes =</span> <span class="dv">2</span>, 
-    <span class="dt">importance =</span> <span class="ot">TRUE</span>)
-<span class="kw">varImpPlot</span>(bagStumpImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">n.var =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">RFStumpImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">maxnodes =</span> <span class="dv">2</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>)
-<span class="kw">varImpPlot</span>(RFStumpImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">n.var =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bagStumpImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">mtry =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>,
+                            <span class="dt">maxnodes=</span><span class="dv">2</span>, <span class="dt">importance=</span><span class="ot">TRUE</span>)
+<span class="kw">varImpPlot</span>(bagStumpImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">n.var =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>,
+           <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">RFStumpImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">maxnodes=</span><span class="dv">2</span>, <span class="dt">importance=</span><span class="ot">TRUE</span>)
+<span class="kw">varImpPlot</span>(RFStumpImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">n.var =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>,
+           <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
 </div>
 <div id="exemples-2" class="section level2">
 <h2>4.5 Exemples</h2>
@@ -224,16 +226,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlbench)
 fried1Simu &lt;-<span class="st"> </span><span class="kw">mlbench.friedman1</span>(<span class="dt">n =</span> <span class="dv">500</span>)
 fried1Data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(fried1Simu<span class="op">$</span>x, <span class="dt">y =</span> fried1Simu<span class="op">$</span>y)
-fried1RFimp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(y <span class="op">~</span><span class="st"> </span>., fried1Data, <span class="dt">importance =</span> <span class="ot">TRUE</span>)
-<span class="kw">varImpPlot</span>(fried1RFimp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
+fried1RFimp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(y <span class="op">~</span>., fried1Data, <span class="dt">importance =</span> <span class="ot">TRUE</span>)
+<span class="kw">varImpPlot</span>(fried1RFimp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>,
+           <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(fried1RFimp, fried1Data, <span class="dt">x.var =</span> <span class="st">&quot;X1&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;X1&quot;</span>)</code></pre>
 </div>
 <div id="predire-la-concentration-dozone-2" class="section level3">
 <h3>4.5.2 Prédire la concentration d’ozone</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;randomForest&quot;</span>)
 <span class="kw">data</span>(<span class="st">&quot;Ozone&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlbench&quot;</span>)
-OzRFDefImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4 <span class="op">~</span><span class="st"> </span>., Ozone, <span class="dt">na.action =</span> na.omit, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">varImpPlot</span>(OzRFDefImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
+OzRFDefImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4 <span class="op">~</span><span class="st"> </span>., Ozone, <span class="dt">na.action =</span> na.omit,
+                           <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">varImpPlot</span>(OzRFDefImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>,
+           <span class="dt">main =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
 </div>
 <div id="analyser-des-donnees-genomiques-2" class="section level3">
 <h3>4.5.3 Analyser des données génomiques</h3>
@@ -241,11 +246,12 @@ OzRFDefImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4
 <span class="kw">data</span>(<span class="st">&quot;vac18&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mixOmics&quot;</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">geneExpr &lt;-<span class="st"> </span>vac18<span class="op">$</span>genes
 stimu &lt;-<span class="st"> </span>vac18<span class="op">$</span>stimulation</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">vacRFDefImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">x =</span> geneExpr, <span class="dt">y =</span> stimu, <span class="dt">mtry =</span> <span class="kw">ncol</span>(geneExpr)<span class="op">/</span><span class="dv">3</span>, 
-    <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">vacRFDefImp &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">x =</span> geneExpr, <span class="dt">y =</span> stimu, <span class="dt">mtry =</span> <span class="kw">ncol</span>(geneExpr)<span class="op">/</span><span class="dv">3</span>,
+                            <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">varImpPlot</span>(vacRFDefImp, <span class="dt">type =</span> <span class="dv">1</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">vacImp &lt;-<span class="st"> </span>vacRFDefImp<span class="op">$</span>importance[, <span class="kw">nlevels</span>(stimu) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]
-<span class="kw">plot</span>(<span class="kw">sort</span>(vacImp, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Variables&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
+<span class="kw">plot</span>(<span class="kw">sort</span>(vacImp, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Variables&quot;</span>,
+     <span class="dt">ylab =</span> <span class="st">&quot;Importance des variables&quot;</span>)</code></pre>
 
 </div>
 </div>
@@ -276,7 +282,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -286,6 +292,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },

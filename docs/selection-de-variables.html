@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Les Forêts aléatoires avec R</title>
+  <title>5 Sélection de variables | Les Forêts aléatoires avec R</title>
   <meta name="description" content="Site du livre">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Les Forêts aléatoires avec R" />
+  <meta property="og:title" content="5 Sélection de variables | Les Forêts aléatoires avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Les Forêts aléatoires avec R" />
+  <meta name="twitter:title" content="5 Sélection de variables | Les Forêts aléatoires avec R" />
   
   <meta name="twitter:description" content="Site du livre" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Robin Genuer et Jean-Michel Poggi">
 
 
-<meta name="date" content="2018-11-13">
+<meta name="date" content="2019-03-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -214,22 +214,23 @@ vsurfToys &lt;-<span class="st"> </span><span class="kw">VSURF</span>(toys<span 
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">3101318</span>)
 vsurfThresToys &lt;-<span class="st"> </span><span class="kw">VSURF_thres</span>(toys<span class="op">$</span>x, toys<span class="op">$</span>y, <span class="dt">mtry =</span> <span class="dv">100</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">vsurfThresToys<span class="op">$</span>varselect.thres</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(vsurfToys, <span class="dt">step =</span> <span class="st">&quot;thres&quot;</span>, <span class="dt">imp.mean =</span> <span class="ot">FALSE</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">2e-04</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(vsurfToys, <span class="dt">step =</span> <span class="st">&quot;thres&quot;</span>, <span class="dt">imp.mean =</span> <span class="ot">FALSE</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">2e-4</span>))</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">vsurfInterpToys &lt;-<span class="st"> </span><span class="kw">VSURF_interp</span>(toys<span class="op">$</span>x, toys<span class="op">$</span>y, <span class="dt">vars =</span> vsurfThresToys<span class="op">$</span>varselect.thres)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">vsurfInterpToys<span class="op">$</span>varselect.interp</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">vsurfPredToys &lt;-<span class="st"> </span><span class="kw">VSURF_pred</span>(toys<span class="op">$</span>x, toys<span class="op">$</span>y, <span class="dt">err.interp =</span> vsurfInterpToys<span class="op">$</span>err.interp, 
-    <span class="dt">varselect.interp =</span> vsurfInterpToys<span class="op">$</span>varselect.interp)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">vsurfPredToys &lt;-<span class="st"> </span><span class="kw">VSURF_pred</span>(toys<span class="op">$</span>x, toys<span class="op">$</span>y, <span class="dt">err.interp =</span> vsurfInterpToys<span class="op">$</span>err.interp, <span class="dt">varselect.interp =</span> vsurfInterpToys<span class="op">$</span>varselect.interp)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">vsurfPredToys<span class="op">$</span>varselect.pred</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">923321</span>, <span class="dt">kind =</span> <span class="st">&quot;L&#39;Ecuyer-CMRG&quot;</span>)
-vsurfSpam &lt;-<span class="st"> </span><span class="kw">VSURF</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">ncores =</span> <span class="dv">3</span>, <span class="dt">clusterType =</span> <span class="st">&quot;FORK&quot;</span>)</code></pre>
+vsurfSpam &lt;-<span class="st"> </span><span class="kw">VSURF</span>(type<span class="op">~</span>., spamApp, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">ncores =</span> <span class="dv">3</span>,
+                   <span class="dt">clusterType =</span> <span class="st">&quot;FORK&quot;</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(vsurfSpam)
 <span class="kw">plot</span>(vsurfSpam)
 <span class="kw">colnames</span>(spamApp[vsurfSpam<span class="op">$</span>varselect.interp])
 <span class="kw">colnames</span>(spamApp[vsurfSpam<span class="op">$</span>varselect.pred])</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">vsurfSpam<span class="op">$</span>mean.jump</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">945834</span>)
-vsurfSpamPred &lt;-<span class="st"> </span><span class="kw">VSURF_pred</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">nmj =</span> <span class="dv">15</span>, <span class="dt">err.interp =</span> vsurfSpam<span class="op">$</span>err.interp, 
-    <span class="dt">varselect.interp =</span> vsurfSpam<span class="op">$</span>varselect.interp)</code></pre>
+vsurfSpamPred &lt;-<span class="st"> </span><span class="kw">VSURF_pred</span>(type<span class="op">~</span>., spamApp, <span class="dt">nmj =</span> <span class="dv">15</span>,
+  <span class="dt">err.interp =</span> vsurfSpam<span class="op">$</span>err.interp,
+  <span class="dt">varselect.interp =</span> vsurfSpam<span class="op">$</span>varselect.interp)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(spamApp[vsurfSpamPred<span class="op">$</span>varselect.pred])</code></pre>
 </div>
 <div id="reglage-des-parametres-pour-la-selection" class="section level2">
@@ -242,8 +243,10 @@ vsurfToysStump<span class="op">$</span>varselect.pred</code></pre>
 vsurfThresToysTuned<span class="op">$</span>varselect.thres</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">vsurfInterpToysTuned &lt;-<span class="st"> </span><span class="kw">tune</span>(vsurfInterpToys, <span class="dt">nsd =</span> <span class="dv">5</span>)
 vsurfInterpToysTuned<span class="op">$</span>varselect.interp</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">vsurfPredToysTuned &lt;-<span class="st"> </span><span class="kw">VSURF_pred</span>(toys<span class="op">$</span>x, toys<span class="op">$</span>y, <span class="dt">err.interp =</span> vsurfInterpToys<span class="op">$</span>err.interp, 
-    <span class="dt">varselect.interp =</span> vsurfInterpToys<span class="op">$</span>varselect.interp, <span class="dt">nmj =</span> <span class="dv">3</span>)
+<pre class="sourceCode r"><code class="sourceCode r">vsurfPredToysTuned &lt;-<span class="st"> </span><span class="kw">VSURF_pred</span>(toys<span class="op">$</span>x, toys<span class="op">$</span>y,
+    <span class="dt">err.interp =</span> vsurfInterpToys<span class="op">$</span>err.interp, 
+    <span class="dt">varselect.interp =</span> vsurfInterpToys<span class="op">$</span>varselect.interp,
+    <span class="dt">nmj =</span> <span class="dv">3</span>)
 vsurfPredToysTuned<span class="op">$</span>varselect.pred</code></pre>
 </div>
 <div id="exemples-3" class="section level2">
@@ -274,8 +277,8 @@ vacVSURF &lt;-<span class="st"> </span><span class="kw">VSURF</span>(<span class
 <pre class="sourceCode r"><code class="sourceCode r">probeSelPred &lt;-<span class="st"> </span><span class="kw">colnames</span>(geneExpr)[vacVSURF<span class="op">$</span>varselect.pred]
 probeSelPred</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">627408</span>, <span class="dt">kind =</span> <span class="st">&quot;L&#39;Ecuyer-CMRG&quot;</span>)
-vacVSURFpara &lt;-<span class="st"> </span><span class="kw">VSURF</span>(<span class="dt">x =</span> geneExpr, <span class="dt">y =</span> stimu, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">ncores =</span> <span class="dv">3</span>, 
-    <span class="dt">clusterType =</span> <span class="st">&quot;FORK&quot;</span>)</code></pre>
+vacVSURFpara &lt;-<span class="st"> </span><span class="kw">VSURF</span>(<span class="dt">x =</span> geneExpr, <span class="dt">y =</span> stimu, <span class="dt">parallel =</span> <span class="ot">TRUE</span>, <span class="dt">ncores =</span> <span class="dv">3</span>,
+                  <span class="dt">clusterType =</span> <span class="st">&quot;FORK&quot;</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(vacVSURFpara)</code></pre>
 
 </div>
@@ -307,7 +310,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -317,6 +320,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Les Forêts aléatoires avec R</title>
+  <title>3 Forêts aléatoires | Les Forêts aléatoires avec R</title>
   <meta name="description" content="Site du livre">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Les Forêts aléatoires avec R" />
+  <meta property="og:title" content="3 Forêts aléatoires | Les Forêts aléatoires avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Les Forêts aléatoires avec R" />
+  <meta name="twitter:title" content="3 Forêts aléatoires | Les Forêts aléatoires avec R" />
   
   <meta name="twitter:description" content="Site du livre" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Robin Genuer et Jean-Michel Poggi">
 
 
-<meta name="date" content="2018-11-13">
+<meta name="date" content="2019-03-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -208,19 +208,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="instabilite-dun-arbre" class="section level3">
 <h3>3.1.1 Instabilité d’un arbre</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">368910</span>)
-spamBoot1 &lt;-<span class="st"> </span>spamApp[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(spamApp), <span class="kw">nrow</span>(spamApp), <span class="dt">replace =</span> <span class="ot">TRUE</span>), 
-    ]
+spamBoot1 &lt;-<span class="st"> </span>spamApp[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(spamApp), <span class="kw">nrow</span>(spamApp), <span class="dt">replace =</span> <span class="ot">TRUE</span>), ]
 treeBoot1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamBoot1)
 <span class="kw">plot</span>(treeBoot1)
 <span class="kw">text</span>(treeBoot1, <span class="dt">xpd =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">368915</span>)
-spamBoot2 &lt;-<span class="st"> </span>spamApp[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(spamApp), <span class="kw">nrow</span>(spamApp), <span class="dt">replace =</span> <span class="ot">TRUE</span>), 
-    ]
+spamBoot2 &lt;-<span class="st"> </span>spamApp[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(spamApp), <span class="kw">nrow</span>(spamApp), <span class="dt">replace =</span> <span class="ot">TRUE</span>), ]
 treeBoot2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamBoot2)
 <span class="kw">plot</span>(treeBoot2)
 <span class="kw">text</span>(treeBoot2, <span class="dt">xpd =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">predict</span>(treeBoot1, spamTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) <span class="op">!=</span><span class="st"> </span><span class="kw">predict</span>(treeBoot2, spamTest, 
-    <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">predict</span>(treeBoot1, spamTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) <span class="op">!=</span>
+<span class="st">     </span><span class="kw">predict</span>(treeBoot2, spamTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</code></pre>
 </div>
 <div id="dun-arbre-a-un-ensemble-le-bagging" class="section level3">
 <h3>3.1.2 D’un arbre à un ensemble : le Bagging</h3>
@@ -244,24 +242,23 @@ errEmpRFDef &lt;-<span class="st"> </span><span class="kw">mean</span>(<span cla
 <div id="le-nombre-darbres-ntree" class="section level3">
 <h3>3.5.1 Le nombre d’arbres <code>ntree</code></h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(RFDef)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">RFDoTrace &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>, <span class="dt">do.trace =</span> <span class="dv">25</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">RFDoTrace &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., <span class="dt">data=</span>spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>, <span class="dt">do.trace=</span><span class="dv">25</span>)</code></pre>
 </div>
 <div id="le-nombre-de-variables-choisies-a-chaque-noeud-mtry" class="section level3">
 <h3>3.5.2 Le nombre de variables choisies à chaque noeud <code>mtry</code></h3>
 <pre class="sourceCode r"><code class="sourceCode r">nbvars &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 oobsMtry &lt;-<span class="st"> </span><span class="kw">sapply</span>(nbvars, <span class="cf">function</span>(nbv) {
-    RF &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>, <span class="dt">mtry =</span> nbv)
-    <span class="kw">return</span>(RF<span class="op">$</span>err.rate[RF<span class="op">$</span>ntree, <span class="st">&quot;OOB&quot;</span>])
-})</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>)<span class="op">$</span>err.rate[<span class="dv">250</span>, 
-    <span class="st">&quot;OOB&quot;</span>]))</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">bagStump &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">ntree =</span> <span class="dv">100</span>, <span class="dt">mtry =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span>
-<span class="st">    </span><span class="dv">1</span>, <span class="dt">maxnodes =</span> <span class="dv">2</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">bagStumpbestvar &lt;-<span class="st"> </span><span class="kw">table</span>(bagStump<span class="op">$</span>forest<span class="op">$</span>bestvar[<span class="dv">1</span>, ])
+  RF &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>, <span class="dt">mtry =</span> nbv)
+  <span class="kw">return</span>(RF<span class="op">$</span>err.rate[RF<span class="op">$</span>ntree, <span class="st">&quot;OOB&quot;</span>])})</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">25</span>,
+  <span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>)<span class="op">$</span>err.rate[<span class="dv">250</span>, <span class="st">&quot;OOB&quot;</span>]))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bagStump &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">ntree =</span> <span class="dv">100</span>,
+                         <span class="dt">mtry =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">maxnodes =</span> <span class="dv">2</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bagStumpbestvar &lt;-<span class="st"> </span><span class="kw">table</span>(bagStump<span class="op">$</span>forest<span class="op">$</span>bestvar[<span class="dv">1</span>,])
 <span class="kw">names</span>(bagStumpbestvar) &lt;-<span class="st"> </span><span class="kw">colnames</span>(spamApp)[<span class="kw">as.numeric</span>(<span class="kw">names</span>(bagStumpbestvar))]
 <span class="kw">sort</span>(bagStumpbestvar, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">RFStump &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">ntree =</span> <span class="dv">100</span>, <span class="dt">maxnodes =</span> <span class="dv">2</span>)
-RFStumpbestvar &lt;-<span class="st"> </span><span class="kw">table</span>(RFStump<span class="op">$</span>forest<span class="op">$</span>bestvar[<span class="dv">1</span>, ])
+<pre class="sourceCode r"><code class="sourceCode r">RFStump &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">ntree =</span> <span class="dv">100</span>, <span class="dt">maxnodes =</span> <span class="dv">2</span>)
+RFStumpbestvar &lt;-<span class="st"> </span><span class="kw">table</span>(RFStump<span class="op">$</span>forest<span class="op">$</span>bestvar[<span class="dv">1</span>,])
 <span class="kw">names</span>(RFStumpbestvar) &lt;-<span class="st"> </span><span class="kw">colnames</span>(spamApp)[<span class="kw">as.numeric</span>(<span class="kw">names</span>(RFStumpbestvar))]
 <span class="kw">sort</span>(RFStumpbestvar, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</code></pre>
 </div>
@@ -275,12 +272,12 @@ RFStumpbestvar &lt;-<span class="st"> </span><span class="kw">table</span>(RFStu
 <pre class="sourceCode r"><code class="sourceCode r">OzRFDef &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4 <span class="op">~</span><span class="st"> </span>., Ozone, <span class="dt">na.action =</span> na.omit)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">OzRFDef
 <span class="kw">plot</span>(OzRFDef)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(nbvars, oobsMtrys, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;mtry&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Erreur OOB&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(nbvars, oobsMtrys, <span class="dt">type =</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;mtry&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Erreur OOB&quot;</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">bins &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>)
 V4bin &lt;-<span class="st"> </span><span class="kw">cut</span>(Ozone<span class="op">$</span>V4, bins, <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">FALSE</span>)
 OzoneBin &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Ozone, V4bin)
-OzRFDefStrat &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4 <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>V9 <span class="op">-</span><span class="st"> </span>V4bin, OzoneBin, <span class="dt">strata =</span> V4bin, 
-    <span class="dt">sampsize =</span> <span class="dv">200</span>, <span class="dt">na.action =</span> na.omit)
+OzRFDefStrat &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4 <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>V9 <span class="op">-</span><span class="st"> </span>V4bin, OzoneBin, <span class="dt">strata =</span> V4bin,
+                             <span class="dt">sampsize =</span> <span class="dv">200</span>, <span class="dt">na.action =</span> na.omit)
 OzRFDefStrat</code></pre>
 </div>
 <div id="analyser-des-donnees-genomiques-1" class="section level3">
@@ -293,9 +290,10 @@ stimu &lt;-<span class="st"> </span>vac18<span class="op">$</span>stimulation</c
 VacRFpsur3
 <span class="kw">plot</span>(VacRFpsur3)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">nFor &lt;-<span class="st"> </span><span class="dv">25</span>
-VacOOBsqrtp &lt;-<span class="st"> </span><span class="kw">replicate</span>(nFor, <span class="kw">randomForest</span>(geneExpr, stimu)<span class="op">$</span>err.rate[<span class="dv">500</span>, <span class="st">&quot;OOB&quot;</span>])
-VacOOBpsur3 &lt;-<span class="st"> </span><span class="kw">replicate</span>(nFor, <span class="kw">randomForest</span>(geneExpr, stimu, <span class="dt">mtry =</span> <span class="kw">ncol</span>(geneExpr)<span class="op">/</span><span class="dv">3</span>)<span class="op">$</span>err.rate[<span class="dv">500</span>, 
-    <span class="st">&quot;OOB&quot;</span>])</code></pre>
+VacOOBsqrtp &lt;-<span class="st"> </span><span class="kw">replicate</span>(nFor,
+  <span class="kw">randomForest</span>(geneExpr, stimu)<span class="op">$</span>err.rate[<span class="dv">500</span>, <span class="st">&quot;OOB&quot;</span>])
+VacOOBpsur3 &lt;-<span class="st"> </span><span class="kw">replicate</span>(nFor,
+  <span class="kw">randomForest</span>(geneExpr, stimu, <span class="dt">mtry =</span> <span class="kw">ncol</span>(geneExpr)<span class="op">/</span><span class="dv">3</span>)<span class="op">$</span>err.rate[<span class="dv">500</span>, <span class="st">&quot;OOB&quot;</span>])</code></pre>
 </div>
 <div id="analyser-la-pollution-par-les-poussieres" class="section level3">
 <h3>3.6.3 Analyser la pollution par les poussières</h3>
@@ -303,7 +301,8 @@ VacOOBpsur3 &lt;-<span class="st"> </span><span class="kw">replicate</span>(nFor
 <span class="kw">data</span>(<span class="st">&quot;jus&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;VSURF&quot;</span>)
 jusComp &lt;-<span class="st"> </span><span class="kw">na.omit</span>(jus)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">jusRF &lt;-<span class="st"> </span><span class="kw">randomForest</span>(PM10 <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> jusComp)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(jusRF, <span class="dt">pred.data =</span> jusComp, <span class="dt">x.var =</span> <span class="st">&quot;NO&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Effet marginal - NO&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(jusRF, <span class="dt">pred.data =</span> jusComp, <span class="dt">x.var =</span> <span class="st">&quot;NO&quot;</span>,
+            <span class="dt">main =</span> <span class="st">&quot;Effet marginal - NO&quot;</span>)</code></pre>
 
 </div>
 </div>
@@ -334,7 +333,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -344,6 +343,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
