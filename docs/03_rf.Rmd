@@ -53,7 +53,7 @@ errEmpRFDef <- mean(predict(RFDef, spamApp) != spamApp$type)
 
 ## 3.5 Réglage des paramètres pour la prédiction
 
-### 3.5.1 Le nombre d’arbres `ntree`
+### 3.5.1 Le nombre d'arbres `ntree`
 
 ```{r rfPlotRFDefEcho}
 plot(RFDef)

@@ -1,6 +1,6 @@
 # 5 Sélection de variables
 
-## 5.4 Le package VSURF
+## 5.4 Le package `VSURF`
 
 ```{r vsurfLoad}
 library(VSURF)
