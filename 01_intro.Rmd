@@ -27,3 +27,9 @@ data("Ozone", package = "mlbench")
 data("vac18", package = "mixOmics")
 ```
 
+### 1.5.4 Pollution par les poussières
+
+```{r introJusLoad}
+data("jus", package = "VSURF")
+```
+
