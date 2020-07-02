@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Forêts aléatoires | Les Forêts aléatoires avec R</title>
+  <meta name="description" content="Site du livre" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Forêts aléatoires | Les Forêts aléatoires avec R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Site du livre" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Forêts aléatoires | Les Forêts aléatoires avec R" />
+  
+  <meta name="twitter:description" content="Site du livre" />
+  
+
+<meta name="author" content="Robin Genuer et Jean-Michel Poggi" />
+
+
+<meta name="date" content="2020-07-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="arbres-cart.html"/>
+<link rel="next" href="importance-des-variables.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Les Forêts aléatoires avec R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préambule</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>1 Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#jeux-de-données"><i class="fa fa-check"></i>1.5 Jeux de données</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#jeu-de-données-fil-rouge-détection-de-spams"><i class="fa fa-check"></i>1.5.1 Jeu de données fil rouge : détection de spams</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#pollution-à-lozone"><i class="fa fa-check"></i>1.5.2 Pollution à l’ozone</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#analyser-des-données-génomiques-pour-une-étude-vaccinale"><i class="fa fa-check"></i>1.5.3 Analyser des données génomiques pour une étude vaccinale</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#pollution-par-les-poussières"><i class="fa fa-check"></i>1.5.4 Pollution par les poussières</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html"><i class="fa fa-check"></i>2 Arbres CART</a><ul>
+<li><a href="arbres-cart.html#le-package-rpart">2.4 Le package <code>rpart</code></a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#découpes-concurrentes-et-de-substitution"><i class="fa fa-check"></i>2.5 Découpes concurrentes et de substitution</a><ul>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#découpes-de-substitution"><i class="fa fa-check"></i>2.5.2 Découpes de substitution</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#interprétabilité"><i class="fa fa-check"></i>2.5.3 Interprétabilité</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#exemples"><i class="fa fa-check"></i>2.6 Exemples</a><ul>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#prédire-la-concentration-dozone"><i class="fa fa-check"></i>2.6.1 Prédire la concentration d’ozone</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#analyser-des-données-génomiques"><i class="fa fa-check"></i>2.6.2 Analyser des données génomiques</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="forêts-aléatoires.html"><a href="forêts-aléatoires.html"><i class="fa fa-check"></i>3 Forêts aléatoires</a><ul>
+<li class="chapter" data-level="" data-path="forêts-aléatoires.html"><a href="forêts-aléatoires.html#principe-général"><i class="fa fa-check"></i>3.1 Principe général</a><ul>
+<li class="chapter" data-level="" data-path="forêts-aléatoires.html"><a href="forêts-aléatoires.html#instabilité-dun-arbre"><i class="fa fa-check"></i>3.1.1 Instabilité d’un arbre</a></li>
+<li class="chapter" data-level="" data-path="forêts-aléatoires.html"><a href="forêts-aléatoires.html#dun-arbre-à-un-ensemble-le-bagging"><i class="fa fa-check"></i>3.1.2 D’un arbre à un ensemble : le Bagging</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="forêts-aléatoires.html"><a href="forêts-aléatoires.html#le-package-randomforest"><i class="fa fa-check"></i>3.3 Le package randomForest</a></li>
+<li class="chapter" data-level="" data-path="forêts-aléatoires.html"><a href="forêts-aléatoires.html#réglage-des-paramètres-pour-la-prédiction"><i class="fa fa-check"></i>3.5 Réglage des paramètres pour la prédiction</a><ul>
+<li><a href="forêts-aléatoires.html#le-nombre-darbres-ntree">3.5.1 Le nombre d’arbres <code>ntree</code></a></li>
+<li><a href="forêts-aléatoires.html#le-nombre-de-variables-choisies-à-chaque-noeud-mtry">3.5.2 Le nombre de variables choisies à chaque noeud <code>mtry</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#exemples"><i class="fa fa-check"></i>3.6 Exemples</a><ul>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#prédire-la-concentration-dozone"><i class="fa fa-check"></i>3.6.1 Prédire la concentration d’ozone</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#analyser-des-données-génomiques"><i class="fa fa-check"></i>3.6.2 Analyser des données génomiques</a></li>
+<li class="chapter" data-level="" data-path="forêts-aléatoires.html"><a href="forêts-aléatoires.html#analyser-la-pollution-par-les-poussières"><i class="fa fa-check"></i>3.6.3 Analyser la pollution par les poussières</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="importance-des-variables.html"><a href="importance-des-variables.html"><i class="fa fa-check"></i>4 Importance des variables</a><ul>
+<li class="chapter" data-level="" data-path="importance-des-variables.html"><a href="importance-des-variables.html#notions-dimportance"><i class="fa fa-check"></i>4.1 Notions d’importance</a></li>
+<li class="chapter" data-level="" data-path="importance-des-variables.html"><a href="importance-des-variables.html#diversité-des-arbres-et-importance-des-variables"><i class="fa fa-check"></i>4.3 Diversité des arbres et importance des variables</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#exemples"><i class="fa fa-check"></i>4.5 Exemples</a><ul>
+<li class="chapter" data-level="" data-path="importance-des-variables.html"><a href="importance-des-variables.html#une-illustration-par-simulation-en-régression"><i class="fa fa-check"></i>4.5.1 Une illustration par simulation en régression</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#prédire-la-concentration-dozone"><i class="fa fa-check"></i>4.5.2 Prédire la concentration d’ozone</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#analyser-des-données-génomiques"><i class="fa fa-check"></i>4.5.3 Analyser des données génomiques</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="sélection-de-variables.html"><a href="sélection-de-variables.html"><i class="fa fa-check"></i>5 Sélection de variables</a><ul>
+<li class="chapter" data-level="" data-path="sélection-de-variables.html"><a href="sélection-de-variables.html#le-package-vsurf"><i class="fa fa-check"></i>5.4 Le package VSURF</a></li>
+<li class="chapter" data-level="" data-path="sélection-de-variables.html"><a href="sélection-de-variables.html#réglage-des-paramètres-pour-la-sélection"><i class="fa fa-check"></i>5.5 Réglage des paramètres pour la sélection</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#exemples"><i class="fa fa-check"></i>5.6 Exemples</a><ul>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#prédire-la-concentration-dozone"><i class="fa fa-check"></i>5.6.1 Prédire la concentration d’ozone</a></li>
+<li class="chapter" data-level="" data-path="arbres-cart.html"><a href="arbres-cart.html#analyser-des-données-génomiques"><i class="fa fa-check"></i>5.6.2 Analyser des données génomiques</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Les Forêts aléatoires avec R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="forêts-aléatoires" class="section level1">
+<h1>3 Forêts aléatoires</h1>
+<div id="principe-général" class="section level2">
+<h2>3.1 Principe général</h2>
+<div id="instabilité-dun-arbre" class="section level3">
+<h3>3.1.1 Instabilité d’un arbre</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">368910</span>)</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">spamBoot1 &lt;-<span class="st"> </span>spamApp[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(spamApp), <span class="kw">nrow</span>(spamApp), <span class="dt">replace =</span> <span class="ot">TRUE</span>), ]</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">treeBoot1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamBoot1)</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="kw">plot</span>(treeBoot1)</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="kw">text</span>(treeBoot1, <span class="dt">xpd =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">368915</span>)</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">spamBoot2 &lt;-<span class="st"> </span>spamApp[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(spamApp), <span class="kw">nrow</span>(spamApp), <span class="dt">replace =</span> <span class="ot">TRUE</span>), ]</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">treeBoot2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamBoot2)</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="kw">plot</span>(treeBoot2)</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="kw">text</span>(treeBoot2, <span class="dt">xpd =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">predict</span>(treeBoot1, spamTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>) <span class="op">!=</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">     </span><span class="kw">predict</span>(treeBoot2, spamTest, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</a></code></pre></div>
+</div>
+<div id="dun-arbre-à-un-ensemble-le-bagging" class="section level3">
+<h3>3.1.2 D’un arbre à un ensemble : le Bagging</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">library</span>(randomForest)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">bagging &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamApp, <span class="dt">mtry =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">bagging</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">errTestBagging &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(bagging, spamTest) <span class="op">!=</span><span class="st"> </span>spamTest<span class="op">$</span>type)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">errEmpBagging &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(bagging, spamApp) <span class="op">!=</span><span class="st"> </span>spamApp<span class="op">$</span>type)</a></code></pre></div>
+</div>
+</div>
+<div id="le-package-randomforest" class="section level2">
+<h2>3.3 Le package randomForest</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">RFDef &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> spamApp)</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">RFDef</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">RFDef &lt;-<span class="st"> </span><span class="kw">randomForest</span>(spamApp[, <span class="dv">-58</span>], spamApp[, <span class="dv">58</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">errTestRFDef &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(RFDef, spamTest) <span class="op">!=</span><span class="st"> </span>spamTest<span class="op">$</span>type)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">errEmpRFDef &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">predict</span>(RFDef, spamApp) <span class="op">!=</span><span class="st"> </span>spamApp<span class="op">$</span>type)</a></code></pre></div>
+</div>
+<div id="réglage-des-paramètres-pour-la-prédiction" class="section level2">
+<h2>3.5 Réglage des paramètres pour la prédiction</h2>
+<div id="le-nombre-darbres-ntree" class="section level3">
+<h3>3.5.1 Le nombre d’arbres <code>ntree</code></h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">plot</span>(RFDef)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">RFDoTrace &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., <span class="dt">data=</span>spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>, <span class="dt">do.trace=</span><span class="dv">25</span>)</a></code></pre></div>
+</div>
+<div id="le-nombre-de-variables-choisies-à-chaque-noeud-mtry" class="section level3">
+<h3>3.5.2 Le nombre de variables choisies à chaque noeud <code>mtry</code></h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">nbvars &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(<span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">oobsMtry &lt;-<span class="st"> </span><span class="kw">sapply</span>(nbvars, <span class="cf">function</span>(nbv) {</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">  RF &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>, <span class="dt">mtry =</span> nbv)</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">  <span class="kw">return</span>(RF<span class="op">$</span>err.rate[RF<span class="op">$</span>ntree, <span class="st">&quot;OOB&quot;</span>])})</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">25</span>,</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">  <span class="kw">randomForest</span>(type <span class="op">~</span><span class="st"> </span>., spamApp, <span class="dt">ntree =</span> <span class="dv">250</span>)<span class="op">$</span>err.rate[<span class="dv">250</span>, <span class="st">&quot;OOB&quot;</span>]))</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">bagStump &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">ntree =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">                         <span class="dt">mtry =</span> <span class="kw">ncol</span>(spamApp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">maxnodes =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">bagStumpbestvar &lt;-<span class="st"> </span><span class="kw">table</span>(bagStump<span class="op">$</span>forest<span class="op">$</span>bestvar[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">names</span>(bagStumpbestvar) &lt;-<span class="st"> </span><span class="kw">colnames</span>(spamApp)[<span class="kw">as.numeric</span>(<span class="kw">names</span>(bagStumpbestvar))]</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="kw">sort</span>(bagStumpbestvar, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">RFStump &lt;-<span class="st"> </span><span class="kw">randomForest</span>(type<span class="op">~</span>., spamApp, <span class="dt">ntree =</span> <span class="dv">100</span>, <span class="dt">maxnodes =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">RFStumpbestvar &lt;-<span class="st"> </span><span class="kw">table</span>(RFStump<span class="op">$</span>forest<span class="op">$</span>bestvar[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="kw">names</span>(RFStumpbestvar) &lt;-<span class="st"> </span><span class="kw">colnames</span>(spamApp)[<span class="kw">as.numeric</span>(<span class="kw">names</span>(RFStumpbestvar))]</a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="kw">sort</span>(RFStumpbestvar, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="exemples" class="section level2">
+<h2>3.6 Exemples</h2>
+<div id="prédire-la-concentration-dozone" class="section level3">
+<h3>3.6.1 Prédire la concentration d’ozone</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;randomForest&quot;</span>)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;Ozone&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlbench&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">OzRFDef &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4 <span class="op">~</span><span class="st"> </span>., Ozone, <span class="dt">na.action =</span> na.omit)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">OzRFDef</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">plot</span>(OzRFDef)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">plot</span>(nbvars, oobsMtrys, <span class="dt">type =</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;mtry&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Erreur OOB&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">bins &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">V4bin &lt;-<span class="st"> </span><span class="kw">cut</span>(Ozone<span class="op">$</span>V4, bins, <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">right =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">OzoneBin &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Ozone, V4bin)</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">OzRFDefStrat &lt;-<span class="st"> </span><span class="kw">randomForest</span>(V4 <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>V9 <span class="op">-</span><span class="st"> </span>V4bin, OzoneBin, <span class="dt">strata =</span> V4bin,</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">                             <span class="dt">sampsize =</span> <span class="dv">200</span>, <span class="dt">na.action =</span> na.omit)</a>
+<a class="sourceLine" id="cb44-6" data-line-number="6">OzRFDefStrat</a></code></pre></div>
+</div>
+<div id="analyser-des-données-génomiques" class="section level3">
+<h3>3.6.2 Analyser des données génomiques</h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;vac18&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mixOmics&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">geneExpr &lt;-<span class="st"> </span>vac18<span class="op">$</span>genes</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">stimu &lt;-<span class="st"> </span>vac18<span class="op">$</span>stimulation</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">VacRFpsur3 &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">x =</span> geneExpr, <span class="dt">y =</span> stimu, <span class="dt">mtry =</span> <span class="kw">ncol</span>(geneExpr)<span class="op">/</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">VacRFpsur3</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="kw">plot</span>(VacRFpsur3)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">nFor &lt;-<span class="st"> </span><span class="dv">25</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">VacOOBsqrtp &lt;-<span class="st"> </span><span class="kw">replicate</span>(nFor,</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">  <span class="kw">randomForest</span>(geneExpr, stimu)<span class="op">$</span>err.rate[<span class="dv">500</span>, <span class="st">&quot;OOB&quot;</span>])</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">VacOOBpsur3 &lt;-<span class="st"> </span><span class="kw">replicate</span>(nFor,</a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">  <span class="kw">randomForest</span>(geneExpr, stimu, <span class="dt">mtry =</span> <span class="kw">ncol</span>(geneExpr)<span class="op">/</span><span class="dv">3</span>)<span class="op">$</span>err.rate[<span class="dv">500</span>, <span class="st">&quot;OOB&quot;</span>])</a></code></pre></div>
+</div>
+<div id="analyser-la-pollution-par-les-poussières" class="section level3">
+<h3>3.6.3 Analyser la pollution par les poussières</h3>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;jus&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;VSURF&quot;</span>)</a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">jusComp &lt;-<span class="st"> </span><span class="kw">na.omit</span>(jus)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">jusRF &lt;-<span class="st"> </span><span class="kw">randomForest</span>(PM10 <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> jusComp)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">partialPlot</span>(jusRF, <span class="dt">pred.data =</span> jusComp, <span class="dt">x.var =</span> <span class="st">&quot;NO&quot;</span>,</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">            <span class="dt">main =</span> <span class="st">&quot;Effet marginal - NO&quot;</span>)</a></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="arbres-cart.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="importance-des-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
