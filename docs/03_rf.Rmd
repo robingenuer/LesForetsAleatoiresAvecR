@@ -37,7 +37,7 @@ errTestBagging <- mean(predict(bagging, spamTest) != spamTest$type)
 errEmpBagging <- mean(predict(bagging, spamApp) != spamApp$type)
 ```
 
-## 3.3 Le package randomForest
+## 3.3 Le package `randomForest`
 
 ```{r rfRFDef}
 RFDef <- randomForest(type ~ ., data = spamApp)
