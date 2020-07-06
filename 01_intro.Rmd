@@ -32,4 +32,3 @@ data("vac18", package = "mixOmics")
 ```{r introJusLoad}
 data("jus", package = "VSURF")
 ```
-

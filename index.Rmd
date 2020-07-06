@@ -28,7 +28,8 @@ Cette page contient l'ensemble des codes R inclus dans le livre "Les Forêts
 aléatoires avec R" de Robin Genuer et Jean-Michel Poggi, édité dans la
 collection Pratique de la statistique des Presses Universitaires de Rennes.
 
-**Vous pouvez commander le livre [ici](http://www.pur-editions.fr/detail.php?idOuv=4792).**
+**Le livre peut être commandé
+[ici](http://www.pur-editions.fr/detail.php?idOuv=4792).**
  
 La navigation est possible directement sur cette page à l'aide du menu à gauche,
 et les scripts R (un fichier R ou Rmd par chapitre) sont également
